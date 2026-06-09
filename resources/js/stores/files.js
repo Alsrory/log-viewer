@@ -165,7 +165,7 @@ export const useFileStore = defineStore({
           signal: this.abortController.signal
         })
         .then(({ data }) => {
-          this.folders = data;
+          this.folders = data.data;
           this.error = data.error || null;
           this.loading = false;
 
