@@ -141,7 +141,7 @@ export const useFileStore = defineStore({
     },
 
     loadFolders() {
-      console.log("تم استدعاء loadFolders");
+      
       // abort the previous request which might now be outdated
       if (this.abortController) {
         this.abortController.abort();
