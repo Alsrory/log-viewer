@@ -141,6 +141,7 @@ export const useFileStore = defineStore({
     },
 
     loadFolders() {
+      console.log("تم استدعاء loadFolders");
       // abort the previous request which might now be outdated
       if (this.abortController) {
         this.abortController.abort();
@@ -164,17 +165,17 @@ export const useFileStore = defineStore({
           },
           signal: this.abortController.signal
         })
-        .then(({ data }) => {
-          this.folders = data.data;
-          this.error = data.error || null;
-          this.loading = false;
-
+        .then(({ data: responseData}) => {
+        const folders = responseData.data || responseData;
+        this.folders = folders;
+        this.error = responseData.error || null;
+        this.loading = false;
           if (this.openFolderIdentifiers.length === 0) {
             this.openFolderForActiveFile();
             this.openRootFolderIfNoneOpen();
           }
 
-          this.setAvailableFileTypes(data);
+          this.setAvailableFileTypes(folders);
 
           this.onScroll();
         })
