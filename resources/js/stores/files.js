@@ -166,6 +166,7 @@ export const useFileStore = defineStore({
           signal: this.abortController.signal
         })
         .then(({ data: responseData}) => {
+          // if the response is paginated, the data will be in the `data` property
         const folders = responseData.data || responseData;
         this.folders = folders;
         this.error = responseData.error || null;
